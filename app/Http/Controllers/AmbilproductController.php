@@ -100,9 +100,9 @@ class AmbilproductController extends Controller
         $product = Product::where('id',$value->value('id_product'));
 
         if( $value->first()->jenis_transaksi_product == 'Masuk' ){
-            $product->update(["jumlah_product"=>(int) $Product->value('jumlah_product') - (int) $value->first()->jumlah_product]);
+            $product->update(["jumlah_product"=>(int) $product->value('jumlah_product') - (int) $value->first()->jumlah_product]);
         }elseif( $value->first()->jenis_transaksi_product == 'Keluar' ){
-            $product->update(["jumlah_product"=>(int) $Product->value('jumlah_product') + (int) $value->first()->jumlah_product]);
+            $product->update(["jumlah_product"=>(int) $product->value('jumlah_product') + (int) $value->first()->jumlah_product]);
         }
         model::destroy($id);
 
