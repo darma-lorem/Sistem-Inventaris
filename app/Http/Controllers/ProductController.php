@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\permission;
 use App\Exports\ProductExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Product;
@@ -78,6 +77,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $product=Product::find($id);
         return view('products.edit',compact('product'));
     }
 

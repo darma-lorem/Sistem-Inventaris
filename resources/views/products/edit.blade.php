@@ -30,20 +30,40 @@
     	@csrf
         @method('PUT')
 
-
-         <div class="row">
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Name:</strong>
-		            <input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Name">
-		        </div>
-		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Detail:</strong>
-		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
-		        </div>
-		    </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Nama Barang:</strong>
+                    <input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Nama Barang">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Kategori:</strong>
+                    <select name="kategori" class="form-control" value="{{ $product->kategori }}" placeholder="Pilih Kategori">
+                        <option value=""><--Pilih Kategori--></option>
+                        <option value="ATK">ATK</option>
+                        <option value="Sovenir">Sovenir</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Satuan:</strong>
+                    <input type="text" name="satuan" value="{{ $product->satuan }}" class="form-control" placeholder="Plih Satuan">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Jumlah Barang:</strong>
+                    <input type="number" name="jumlah_product" value="{{ $product->jumlah_product }}" class="form-control" placeholder="Jumlah Barang">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Tanggal Masuk:</strong>
+                    <input type="date" name="tanggal_masuk" value="{{ $product->tanggal_masuk }}" class="form-control" placeholder="Masukan Tanggal">
+                </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 		      <button type="submit" class="btn btn-primary">Submit</button>
 		    </div>
