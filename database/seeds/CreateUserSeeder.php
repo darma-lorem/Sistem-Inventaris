@@ -16,8 +16,8 @@ class CreateUserSeeder extends Seeder
         	'name' => 'Dharma',
         	'last_name' => 'Putra',
         	'email' => 'admin@test.com',
-            'jabatan' => 'admin',
-        	'password' => bcrypt('12345678'),
+            'jabatan' => 'ADMIN',
+        	'password' => bcrypt('123456'),
         ]);
 
         $admin->assignRole('admin');
@@ -26,8 +26,8 @@ class CreateUserSeeder extends Seeder
         	'name' => 'Agus',
         	'last_name' => 'Arya',
         	'email' => 'agus@test.com',
-            'jabatan' => 'inventaris',
-        	'password' => bcrypt('12345678'),
+            'jabatan' => 'OPERASIONAL',
+        	'password' => bcrypt('123456'),
         ]);
 
         $operasional->assignRole('user');
@@ -36,8 +36,8 @@ class CreateUserSeeder extends Seeder
         	'name' => 'Riska',
         	'last_name' => 'Dewi',
         	'email' => 'riska@test.com',
-            'jabatan' => 'operasional',
-        	'password' => bcrypt('12345678'),
+            'jabatan' => 'INVENTARIS',
+        	'password' => bcrypt('123456'),
         ]);
 
         $inventaris->assignRole('user');

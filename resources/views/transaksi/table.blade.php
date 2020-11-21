@@ -27,26 +27,26 @@
                         <table class="table table-hover table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th class="text-center">Kode Transaksi</th>
                                     <th class="text-center">Nama Barang</th>
-                                    <th class="text-center">Jenis ambil Barang</th>
+                                    <th class="text-center">Kode Barang</th>
+                                    <th class="text-center">Jenis Transaksi</th>
                                     <th class="text-center">Jumlah Barang</th>
                                     <th class="text-center">Detail Penggunaan Barang</th>
                                     <th class="text-center">Tanggal Pengambilan</th>
-                                    <th class="text-center">Dibuat Oleh</th>
-                                    <th class="text-center">Terakhir Ubah</th>
                                     <th class="text-center">&nbsp;action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($ambils as $ambil)
                                     <tr>
+                                        <td>{{ $ambil->getCode() }}</td>
                                         <td>{{ $ambil->getNameProduct->name }}</td>
+                                        <td>{{ $ambil->getNameProduct->kode_product }}</td>
                                         <td>{{ $ambil->jenis_transaksi_product }}</td>
                                         <td>{{ $ambil->jumlah_product }}</td>
                                         <td>{{ $ambil->detail_penggunaan_product}}</td>
                                         <td>{{ $ambil->tanggal_pengambilan}}</td>
-                                        <td>{{ $ambil->getCreatedBy->name }}</td>
-                                        <td>{{ isset($ambil->getUpdatedBy) ? $ambil->getUpdatedBy->name : '-' }}</td>
                                         <td>
                                             <a href="{{ URL::route('transaksi.edit',$ambil->id) }}"><i class="fa fa-edit"></i></a>
                                             <a href="{{ url('transaksi/destroy/'.$ambil->id) }}"><i class="fa fa-trash red-color"></i></a>

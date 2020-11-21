@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\AmbilProduct as model;
 use App\Product;
+use App\Kategori;
+use App\Satuan;
 use App\Exports\AmbilExport;
 use Maatwebsite\Excel\Facades\Excel;
 use DB;
@@ -18,7 +20,7 @@ class AmbilproductController extends Controller
      */
     public function index()
     {
-        $ambils = model::with('getNameProduct','getCreatedBy','getUpdatedBy')->orderBy('id','desc')->get();
+        $ambils = model::with('getNameProduct','getCreatedBy','getUpdatedBy')->orderBy('id','asc')->get();
         return view('transaksi.table',compact('ambils'));
     }
 
@@ -29,7 +31,7 @@ class AmbilproductController extends Controller
      */
     public function create()
     {
-        $id_product = product::pluck('name','id');
+        $id_product = product::pluck('kode_product','id');
 
         return view('transaksi.form',compact('id_product'));
     }
@@ -42,7 +44,20 @@ class AmbilproductController extends Controller
      */
     public function store(Request $request)
     {
-        model::create($request->all());
+
+        $ambils=model::create([
+            'id_product' => $request->id_product,
+            'jenis_transaksi_product' => $request->jenis_transaksi_product,
+            'jumlah_product' => $request->jumlah_product,
+            'detail_penggunaan_product' => $request->detail_penggunaan_product,
+            'tanggal_pengambilan' => $request->tanggal_pengambilan,
+        ]);
+
+        model::where('id', $ambils->id)->update([
+            'kode_trans'=>$ambils->getCode(),
+        ]);
+
+
         $this->updateProduct($request);
         return redirect('transaksi');
     }
@@ -82,10 +97,9 @@ class AmbilproductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->updateProduct($request, $id);
         $data = $request->except('_method', '_token');
         model::where('id',$id)->update($data);      
-        return redirect('');
+        return redirect('transaksi');
     }
 
     /**

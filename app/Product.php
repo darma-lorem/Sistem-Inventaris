@@ -9,19 +9,30 @@ class Product extends Model
 	protected $table = 'products';
 	protected $fillable = [
 		'name',
-		'kategori',
+		'kode_product',
+		'id_kategori',
 		'jumlah_product',
-		'satuan',
-		'tanggal_masuk',
+		'id_satuan',
 		'updated_by'
 	];
 
 	public function getUpdatedBy()
 	{
-		return $this->hasOne(User::class, 'id','updated_by');
+		return $this->belongsTo(User::class, 'updated_by', 'id');
 	}
-	public function getNameKategori()
+
+	public function getKodeSatuan()
 	{
-		return $this->hasOne(Kategori::class, 'id', 'name');
+		return $this->belongsTo('App\Satuan', 'id_kategori', 'id');
+	}
+
+	public function getKodeKategori()
+	{
+		return $this->belongsTo('App\Kategori', 'id_satuan', 'id');
+	}
+
+	public function ambilproduct()
+	{
+		return $this->hasMany('App\AmbilProduct');
 	}
 }

@@ -12,7 +12,7 @@
                 
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
+                <a class="btn btn-success" href="{{ route('products.create') }}">Tambahh Data</a>
             </div>
         </div>
     </div>
@@ -28,24 +28,22 @@
     <table class="table table-hover table-striped table-bordered">
         <thead>
             <tr>
-                <th>No</th>
                 <th>Nama Barang</th>
+                <th>Kode Barang</th>
                 <th>Kategori Barang</th>
                 <th>Satuan</th>
                 <th>Jumlah Barang</th>
-                <th>Tanggal Masuk</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
         @foreach ($products as $product)
         <tbody>
             <tr>
-                <td>{{ ++$i }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->kategori }}</td>
-                <td>{{ $product->satuan }}</td>
+                <td>{{ $product->kode_product}}</td>
+                <td>{{ $product->getKodeKategori->kode_kategori }}</td>
+                <td>{{ $product->getKodeSatuan->kode_satuan }}</td>
                 <td>{{ $product->jumlah_product }}</td>
-                <td>{{ $product->tanggal_masuk }}</td>
                 <td>
                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">
                     <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>

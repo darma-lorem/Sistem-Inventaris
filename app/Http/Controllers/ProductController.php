@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Exports\ProductExport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Product;
+use App\Product as model;
+use App\Kategori;
+use App\Satuan;
 
 class ProductController extends Controller
 {
@@ -20,8 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
-        return view('products.index',compact('products'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $products = model::with('getKodeKategori', 'getKodeSatuan', 'getUpdatedBy')->orderBy('id','desc')->get();
+        // dd($products->toJSON());
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -31,7 +34,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $kategori = Kategori::all();
+        $satuan = Satuan::all();
+        return view('products.create', compact('kategori'))->with('satuan', $satuan);
     }
 
     /**
@@ -44,19 +49,20 @@ class ProductController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'kategori' => 'required',
-            'satuan' => 'required',
+            'kode_product' => 'required',
+            'id_kategori' => 'required',
+            'id_satuan' => 'required',
             'jumlah_product' => 'required',
-            'tanggal_masuk' => 'required'
         ]);
-        Product::create([
+        model::create([
            'name' => $request->name,
-           'kategori' => $request->kategori,
-           'satuan' => $request->satuan,
+           'kode_product' => $request->kode_product,
+           'id_kategori' => $request->id_kategori,
+           'id_satuan' => $request->id_satuan,
            'jumlah_product' => $request->jumlah_product,
-           'tanggal_masuk' => $request->tanggal_masuk
         ]);
-        return redirect()->route('products.index')->with('success','Product created successfully.');    }
+        return redirect()->route('products.index')->with('success','Product created successfully.');    
+    }
 
     /**
      * Display the specified resource.
@@ -77,8 +83,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product=Product::find($id);
-        return view('products.edit',compact('product'));
+        $products=model::find($id);
+        $kategori = Kategori::all();
+        $satuan = Satuan::all();
+        return view('products.edit',compact('products', 'kategori', 'satuan'));
     }
 
     /**
@@ -92,17 +100,17 @@ class ProductController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'kategori' => 'required',
-            'satuan' => 'required',
-            'jumlah' => 'required',
-            'tanggal_masuk' => 'required'
+            'kode_product' => 'required',
+            'id_kategori' => 'required',
+            'id_satuan' => 'required',
+            'jumlah_product' => 'required',      
         ]);
-        Product::update([
+        model::where('id', $id)->update([
            'name' => $request->name,
-           'kategori' => $request->kategori,
-           'satuan' => $request->satuan,
-           'jumlah' => $request->jumlah_product,
-           'tanggal_masuk' => $request->tanggal_masuk
+           'kode_product' => $request->kode_product,
+           'id_kategori' => $request->id_kategori,
+           'id_satuan' => $request->id_satuan,
+           'jumlah_product' => $request->jumlah_product,
         ]);
         return redirect()->route('products.index')->with('success','Product updated successfully');
     }
@@ -115,7 +123,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->delete();
+        model::find($id)->delete();
         return redirect()->route('products.index')->with('success','Product deleted successfully');
     }
 

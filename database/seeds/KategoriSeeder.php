@@ -13,11 +13,13 @@ class KategoriSeeder extends Seeder
     public function run()
     {
         Kategori::create([
-        	'name' => 'ATK',
+        	'name' => 'Alat Tulis Kantor',
+            'kode_kategori' => 'ATK'
         ]);
 
         Kategori::create([
         	'name' => 'Sovenir',
+            'kode_kategori' => 'SV'
         ]);
     }
 }

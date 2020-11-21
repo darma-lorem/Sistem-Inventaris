@@ -32,6 +32,8 @@ Route::put('/uprofile', 'UprofileController@update')->name('uprofile.update');
 Route::get('/transaksi/export','AmbilproductController@export');
 Route::get('/transaksi/destroy/{id}','AmbilproductController@destroy');
 Route::resource('transaksi', 'AmbilproductController');
+Route::resource('satuan', 'SatuanController');
+Route::resource('kategori', 'KategoriController');
 
 Route::get('/about', function () {
     return view('about');

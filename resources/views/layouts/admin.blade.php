@@ -59,7 +59,18 @@
                 <span>{{ __('Users') }}</span>
             </a>
         </li>
-
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('satuan.index') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>{{ __('Satuan') }}</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('kategori.index') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>{{ __('Kategori') }}</span>
+            </a>
+        </li>
         <!-- Nav Item - About -->
         
         <!-- Divider -->

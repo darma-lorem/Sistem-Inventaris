@@ -27,8 +27,6 @@
 
     <form action="{{ route('products.store') }}" method="POST">
     	@csrf
-
-
          <div class="row">
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
@@ -38,30 +36,36 @@
 		    </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Kode Barang:</strong>
+                    <input type="text" name="kode_product" class="form-control" placeholder="Kode Barang">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Kategori:</strong>
-                    <select name="kategori" class="form-control" placeholder="Pilih Kategori">
+                    <select name="id_kategori" class="form-control">
                         <option value=""><--Pilih Kategori--></option>
-                        <option value="ATK">ATK</option>
-                        <option value="Sovenir">Sovenir</option>
+                        @foreach ($kategori as $kate)
+                        <option value="{{ $kate->id }}">{{ $kate->kode_kategori}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Satuan:</strong>
-                    <input type="text" name="satuan" class="form-control" placeholder="Plih Satuan">
+                    <select name="id_satuan" class="form-control">
+                        <option value=""><--Pilih Satuan--></option>
+                        @foreach ($satuan as $sata)
+                        <option value="{{$sata->id}}">{{$sata->kode_satuan}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Jumlah Barang:</strong>
                     <input type="number" name="jumlah_product" class="form-control" placeholder="Jumlah Barang">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Tanggal Masuk:</strong>
-                    <input type="date" name="tanggal_masuk" class="form-control" placeholder="Masukan Tanggal">
                 </div>
             </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
